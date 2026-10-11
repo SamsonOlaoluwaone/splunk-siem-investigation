@@ -2,7 +2,7 @@
 
 SOC-style investigations built in **Splunk Enterprise**. I ingested Linux SSH logs and the Boss of the SOC v1 dataset (web traffic, IDS alerts, Windows and Sysmon logs), extracted fields, wrote and tuned detection rules, investigated two incidents, and presented the findings in a dashboard and two formal reports.
 
-![Dashboard overview](screenshots/dashboard-full.png)
+![Dashboard overview](screenshot/dashboard-full.png)
 
 ---
 
@@ -107,7 +107,7 @@ It returns one IP (`40.80.148.42`, gap 2.4 minutes). The password guesser, with 
 
 Six panels cover the Linux incident: top attacking IPs, usernames targeted, failed logins over time, successful logins by source, the **admin compromise timeline**, and escalation frequency by user.
 
-![Admin compromise timeline](screenshots/admin-timeline.png)
+![Admin compromise timeline](screenshot/admin-timeline.png)
 
 ---
 
