@@ -1,0 +1,7 @@
+```Detection 4: Sudo to root (baseline of who escalates) | MITRE T1548.003 | Data: index=test sourcetype=linux_secure```
+```Status: validated. 688 sudo-to-root events: djohnson 412, nsharpe 203, myuan 72, admin 1```
+index=test sourcetype=linux_secure "sudo" "USER=root"
+| rex field=_raw "sudo:\s+(?<sudo_user>\S+)"
+| where sudo_user!="pam_unix(sudo:session):"
+| stats count by sudo_user
+| sort - count

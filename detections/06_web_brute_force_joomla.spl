@@ -1,0 +1,7 @@
+```Detection 6: Web brute force (Joomla admin login) | MITRE T1110.001 | Data: index=botsv1 sourcetype=stream:http```
+```Saved report: Detection_WebBruteForce_Joomla```
+```Status: validated. Returns 23.22.63.114 (412 POSTs)```
+index=botsv1 sourcetype=stream:http http_method=POST uri_path="/joomla/administrator/index.php"
+| bin _time span=5m
+| stats count by _time, src_ip
+| where count > 10

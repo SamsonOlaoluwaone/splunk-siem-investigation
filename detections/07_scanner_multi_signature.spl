@@ -1,0 +1,7 @@
+```Detection 7: Scanner (many distinct IDS signatures) | MITRE T1595.002 | Data: index=botsv1 sourcetype=suricata```
+```Saved report: Detection_Scanner_MultiSignature```
+```Status: validated. Returns only 40.80.148.42 (50 distinct signatures)```
+index=botsv1 sourcetype=suricata
+| stats count, dc(alert.signature) as distinct_signatures by src_ip
+| where distinct_signatures > 5
+| sort - count

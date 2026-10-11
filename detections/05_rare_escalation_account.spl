@@ -1,0 +1,12 @@
+```Detection 5: Rare privilege escalation | MITRE T1078, T1548.003 | Data: index=test sourcetype=linux_secure```
+```Saved report: Detection_SSH_RareEscalation```
+```Status: validated. Returns one row: admin with 1 escalation```
+```Limits: measures rarity, not login timing. Cannot catch a takeover of an account that escalates routinely```
+index=test sourcetype=linux_secure ("Accepted password" OR ("sudo" "USER=root"))
+| rex field=_raw "Accepted password for (?<ssh_user>\S+) from (?<src_ip>\d+\.\d+\.\d+\.\d+)"
+| rex field=_raw "sudo:\s+(?<sudo_user>\S+)"
+| eval event_type=case(isnotnull(ssh_user), "login", isnotnull(sudo_user), "escalation")
+| eval user=coalesce(ssh_user, sudo_user)
+| where user!="pam_unix(sudo:session):"
+| stats count(eval(event_type="escalation")) as escalation_count by user
+| where escalation_count > 0 AND escalation_count < 5

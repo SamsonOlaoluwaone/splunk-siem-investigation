@@ -1,0 +1,8 @@
+```Detection 1: SSH brute force | MITRE T1110 | Data: index=test sourcetype=linux_secure```
+```Status: per-IP failure counts run and confirmed; the 5-minute-bucket version below not yet run```
+index=test sourcetype=linux_secure "Failed password"
+| rex field=_raw "Failed password for (invalid user )?(?<ssh_user>\S+) from (?<src_ip>\d+\.\d+\.\d+\.\d+)"
+| bin _time span=5m
+| stats count, dc(ssh_user) as unique_users by _time, src_ip
+| where count > 10
+| sort - count

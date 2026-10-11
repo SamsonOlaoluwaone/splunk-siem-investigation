@@ -1,0 +1,12 @@
+```Detection 1: SSH brute force (persistence) | MITRE T1110 | Data: index=test sourcetype=linux_secure```
+```Saved report: Detection_SSH_BruteForce_Persistent```
+```Status: validated. Flags 5 of 184 IPs, with 87.194.216.51 first (60 windows)```
+```Tuning: v1 more than 10 failures in 5 min flagged 182 of 184 IPs. v2 more than 25 flagged 11 but missed the top attacker (busiest window was 25). v3 below counts persistence```
+index=test sourcetype=linux_secure "Failed password"
+| rex field=_raw "Failed password for (invalid user )?(?<ssh_user>\S+) from (?<src_ip>\d+\.\d+\.\d+\.\d+)"
+| bin _time span=5m
+| stats count by _time, src_ip
+| where count > 10
+| stats count as windows_over_10, max(count) as busiest_window by src_ip
+| where windows_over_10 >= 20
+| sort - windows_over_10

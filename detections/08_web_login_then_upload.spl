@@ -1,0 +1,10 @@
+```Detection 8: Login followed by package upload | MITRE T1078, T1505.003 | Data: index=botsv1 sourcetype=stream:http```
+```Saved report: Detection_Web_LoginThenUpload```
+```Status: validated. Returns 40.80.148.42 (gap 2.4 minutes)```
+index=botsv1 sourcetype=stream:http http_method=POST uri_path="/joomla/administrator/index.php"
+| eval action=case(like(form_data,"%passwd=%"),"login", like(form_data,"%task=install.install%"),"upload")
+| where isnotnull(action)
+| stats min(eval(if(action="login",_time,null()))) as first_login, min(eval(if(action="upload",_time,null()))) as upload_time by src_ip
+| where isnotnull(first_login) AND isnotnull(upload_time) AND (upload_time - first_login) < 600
+| eval minutes_between=round((upload_time - first_login)/60, 1)
+| convert ctime(first_login) ctime(upload_time)

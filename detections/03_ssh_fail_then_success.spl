@@ -1,0 +1,11 @@
+```Detection 3: Failed logins followed by a success | MITRE T1110, T1078 | Data: index=test sourcetype=linux_secure```
+```Saved report: Detection_SSH_FailThenSuccess```
+```Status: validated. Returns no results, which is the expected result: no IP with more than 5 failures ever succeeded```
+```Sanity check: with the failure threshold removed, the 5 IPs that ever logged in had 0 to 1 failures each, so the logic works and the threshold was simply never reached```
+index=test sourcetype=linux_secure ("Failed password" OR "Accepted password")
+| rex field=_raw "Failed password for (invalid user )?(?<ssh_user>\S+) from (?<src_ip>\d+\.\d+\.\d+\.\d+)"
+| rex field=_raw "Accepted password for (?<ssh_user>\S+) from (?<src_ip>\d+\.\d+\.\d+\.\d+)"
+| eval outcome=case(match(_raw,"Failed password"),"failure", match(_raw,"Accepted password"),"success")
+| stats count(eval(outcome="failure")) as failures, count(eval(outcome="success")) as successes by src_ip
+| where failures > 5 AND successes > 0
+| sort - failures

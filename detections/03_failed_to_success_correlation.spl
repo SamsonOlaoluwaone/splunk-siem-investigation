@@ -1,0 +1,8 @@
+```Detection 3: Failed-to-success correlation | MITRE T1110, T1078 | Data: index=test sourcetype=linux_secure```
+```Status: NOT YET RUN in this form (the manual check of the top attacker against successful logins was run)```
+index=test sourcetype=linux_secure ("Failed password" OR "Accepted password")
+| rex field=_raw "Failed password for (invalid user )?(?<ssh_user>\S+) from (?<src_ip>\d+\.\d+\.\d+\.\d+)"
+| rex field=_raw "Accepted password for (?<ssh_user>\S+) from (?<src_ip>\d+\.\d+\.\d+\.\d+)"
+| eval outcome=case(match(_raw,"Failed password"),"failure", match(_raw,"Accepted password"),"success")
+| stats count(eval(outcome="failure")) as failures, count(eval(outcome="success")) as successes by src_ip
+| where failures > 5 AND successes > 0
