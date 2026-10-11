@@ -1,6 +1,6 @@
 # Security Incident Report: SSH Brute Force and Account Compromise
 
-**Prepared by:** [AKINRINADE SAMSON OLAOLUWA]
+**Prepared by:** AKINRINADE SAMSON OLAOLUWA
 **Date Prepared:** October 11, 2026
 **Environment:** Linux Server (`linux_server`), SSH Authentication Logs
 **SIEM Platform:** Splunk Enterprise (Free license tier)
