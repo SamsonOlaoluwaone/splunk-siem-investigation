@@ -1,8 +1,6 @@
 # Security Incident Report: SSH Brute Force and Account Compromise
 
-**Report ID:** IR-2026-001
-**Classification:** Internal Use
-**Prepared by:** [Your Name], SOC Analyst
+**Prepared by:** [AKINRINADE SAMSON OLAOLUWA]
 **Date Prepared:** October 11, 2026
 **Environment:** Linux Server (`linux_server`), SSH Authentication Logs
 **SIEM Platform:** Splunk Enterprise (Free license tier)
