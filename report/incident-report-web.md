@@ -1,8 +1,6 @@
 # Security Incident Report: Web Server Compromise
 
-**Report ID:** IR-2026-002
-**Classification:** Internal Use
-**Prepared by:** [Your Name], SOC Analyst
+**Prepared by:** AKINRINADE SAMSON OLAOLUWA
 **Date Prepared:** October 9, 2026
 **Environment:** Joomla web server `192.168.250.70` (Wayne Corp Inc. network, Boss of the SOC v1 dataset)
 **SIEM Platform:** Splunk Enterprise (Free license tier)
