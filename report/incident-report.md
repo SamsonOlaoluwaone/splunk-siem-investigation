@@ -191,5 +191,3 @@ index=test sourcetype=linux_secure ("Accepted password" OR "sudo") "admin"
 ```
 
 ---
-
-*End of report.*
