@@ -150,18 +150,6 @@ Hypotheses that the data did not support, documented so reviewers can see what w
 
 ## Repository structure
 
-```
-splunk-siem-investigation/
-├── README.md
-├── detections/          # one .spl file per rule (8 files)
-├── report/
-│   ├── incident-report.md       # Linux SSH incident
-│   └── incident-report-web.md   # Joomla web incident
-└── screenshots/
-    ├── dashboard-full.png
-    └── admin-timeline.png
-```
-
 ## Skills demonstrated
 
 Log parsing and regex field extraction, SPL, threat detection, cross-source event correlation, threshold tuning and false-positive reduction, MITRE ATT&CK mapping, incident investigation, dashboarding, and evidence-based technical reporting.
