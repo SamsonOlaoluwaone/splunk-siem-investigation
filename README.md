@@ -2,7 +2,7 @@
 
 SOC-style investigations built in **Splunk Enterprise**. I ingested Linux SSH logs and the Boss of the SOC v1 dataset (web traffic, IDS alerts, Windows and Sysmon logs), extracted fields, wrote and tuned detection rules, investigated two incidents, and presented the findings in a dashboard and two formal reports.
 
-![Dashboard overview](screenhot/dashboard-full.png)
+![Dashboard overview](screenshot/dashboard-full.png)
 
 ---
 
